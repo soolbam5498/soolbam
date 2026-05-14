@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="제주의 밤을 담다 — 감성 요리 주점 술밤. 벚꽃 무드의 공간에서 제주 딱새우와 숙성 연어회를 만나보세요." />
+  <title>술밤 Sulbam — 감성 요리 주점</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sulbam: {
+              pink: '#F5B0E6',
+              blue: '#4090E3',
+              lime: '#D2E05C',
+              orange: '#EDB652',
+              red: '#E35874',
+            },
+          },
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'sakura-soft':
+              'radial-gradient(ellipse 120% 80% at 50% -20%, rgba(245, 176, 230, 0.35), transparent 55%), radial-gradient(ellipse 90% 60% at 100% 50%, rgba(237, 182, 82, 0.12), transparent 50%), radial-gradient(ellipse 80% 50% at 0% 80%, rgba(64, 144, 227, 0.08), transparent 45%)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    /* 스크롤 시: 벚꽃 무드 반투명 헤더 (기획안: 반투명 배경) */
+    header.is-scrolled {
+      background-color: rgba(255, 252, 254, 0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 24px rgba(245, 176, 230, 0.25);
+      border-bottom: 1px solid rgba(245, 176, 230, 0.35);
+    }
+    header.is-scrolled .brand-text {
+      color: #c2185b;
+      text-shadow: none;
+    }
+    header.is-scrolled .nav-link {
+      color: #4a1942;
+      text-shadow: none;
+    }
+    header.is-scrolled .nav-link:hover {
+      color: #f5b0e6;
+    }
+    .menu-panel {
+      display: none;
+    }
+    .menu-panel.is-active {
+      display: block;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-sakura-soft text-neutral-900 antialiased font-sans">
+
+  <header
+    id="site-header"
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent"
+    role="banner"
+  >
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
+      <a href="#" class="brand-text text-xl font-bold tracking-tight text-white drop-shadow-md md:text-2xl">
+        Sulbam <span class="font-normal text-white/90">술밤</span>
+      </a>
+      <nav class="flex gap-6 text-sm font-medium md:gap-10 md:text-base" aria-label="주요 메뉴">
+        <a href="#about" class="nav-link text-white drop-shadow transition-colors duration-200 hover:text-sulbam-pink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">About</a>
+        <a href="#menu" class="nav-link text-white drop-shadow transition-colors duration-200 hover:text-sulbam-pink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Menu</a>
+        <a href="#location" class="nav-link text-white drop-shadow transition-colors duration-200 hover:text-sulbam-pink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Location</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 히어로: 매장 제공 soolbam_hero.png + 딱새우·연어 비주얼 -->
+    <section
+      class="relative flex min-h-[88vh] items-center justify-center overflow-hidden px-4 pt-24 pb-16"
+      aria-labelledby="hero-heading"
+    >
+      <div
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style="background-image: url('pic/soolbam_hero.png');"
+        role="img"
+        aria-label="술밤 히어로 비주얼"
+      ></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-rose-950/55 via-neutral-900/50 to-rose-950/65"></div>
+      <div class="pointer-events-none absolute inset-0 opacity-30 bg-[url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Cpath fill=%22%23F5B0E6%22 fill-opacity=%220.15%22 d=%22M50 0c5 20-15 35 0 55s15 35 0 55%22/%3E%3C/svg%3E')] bg-[length:120px] mix-blend-soft-light"></div>
+
+      <div class="relative z-10 mx-auto max-w-4xl text-center">
+        <p class="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-sulbam-lime md:text-base drop-shadow">
+          Jeju night · Sulbam
+        </p>
+        <h1 id="hero-heading" class="mb-8 text-3xl font-bold leading-tight text-white drop-shadow-lg md:text-5xl lg:text-6xl">
+          제주의 밤을 담다,<br class="hidden sm:inline" />
+          감성 요리 주점 술밤
+        </h1>
+        <a
+          href="#menu"
+          class="inline-flex items-center justify-center rounded-full bg-sulbam-red px-10 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-[#d94a66] hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          메뉴 보기
+        </a>
+      </div>
+    </section>
+
+    <!-- About: 좌 텍스트 · 우 매장 사진 (기획안) -->
+    <section id="about" class="scroll-mt-24 border-y border-pink-100/80 bg-white/70 py-16 backdrop-blur-sm md:py-24" aria-labelledby="about-heading">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-2 md:items-center md:gap-14 md:px-6">
+        <article class="order-2 md:order-1">
+          <h2 id="about-heading" class="mb-2 text-sm font-semibold uppercase tracking-widest text-sulbam-pink">About</h2>
+          <p class="mb-6 text-2xl font-bold text-rose-950 md:text-3xl">브랜드 스토리</p>
+          <p class="mb-4 leading-relaxed text-neutral-700">
+            술밤은 제주에서 올라온 <strong class="font-bold text-sulbam-pink">신선함</strong>을 한 접시에 담아내는 감성 요리 주점입니다.
+            매장은 따뜻한 조명과 편안한 좌석으로 오래 머물고 싶은 분위기를 지향합니다.
+          </p>
+          <p class="leading-relaxed text-neutral-700">
+            시그니처인 <span class="font-bold text-sulbam-pink">제주 딱새우</span>와 숙성 연어회는 매일 들어오는 식재료를 바탕으로 준비됩니다.
+            안주 한 접시, 술 한 잔으로 제주의 밤을 옮겨 드립니다.
+          </p>
+        </article>
+        <div class="order-1 md:order-2 space-y-4">
+          <figure class="overflow-hidden rounded-2xl shadow-xl ring-2 ring-pink-100">
+            <img
+              src="pic/Restaurant_interior_02.jpg"
+              alt="술밤 매장 내부 분위기"
+              class="aspect-[4/3] h-full w-full object-cover"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </figure>
+          <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <img src="pic/Restaurant_interior_01.jpg" alt="" class="aspect-square rounded-xl object-cover ring-1 ring-pink-100" width="200" height="200" loading="lazy" />
+            <img src="pic/Restaurant_interior_03.jpg" alt="" class="aspect-square rounded-xl object-cover ring-1 ring-pink-100" width="200" height="200" loading="lazy" />
+            <img src="pic/Restaurant_interior_04.jpg" alt="" class="aspect-square rounded-xl object-cover ring-1 ring-pink-100" width="200" height="200" loading="lazy" />
+            <img src="pic/soolbam.jpg" alt="술밤 매장 외관" class="aspect-square rounded-xl object-cover object-center ring-1 ring-pink-100" width="200" height="200" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="scroll-mt-24 py-16 md:py-24" aria-labelledby="menu-heading">
+      <div class="mx-auto max-w-6xl px-4 md:px-6">
+        <h2 id="menu-heading" class="mb-2 text-center text-sm font-semibold uppercase tracking-widest text-sulbam-pink">Menu</h2>
+        <p class="mb-4 text-center text-2xl font-bold text-rose-950 md:text-3xl">메뉴</p>
+        <p class="mx-auto mb-8 max-w-2xl text-center text-neutral-600">
+          세트부터 회·찜, 요리·사이드까지 — 술과 어울리는 메뉴를 골라보세요.
+        </p>
+
+        <!-- 메뉴판 사진 (pic/menu.jpg) -->
+        <figure class="mb-10 overflow-hidden rounded-2xl shadow-lg ring-2 ring-pink-100">
+          <img src="pic/menu.jpg" alt="술밤 메뉴판" class="w-full object-cover object-top" width="1200" height="480" loading="lazy" />
+        </figure>
+
+        <!-- BEST: 기획안 — 상단 배치 (벚꽃 테마 테두리) -->
+        <article
+          class="mb-12 overflow-hidden rounded-2xl border-4 border-sulbam-pink/90 bg-gradient-to-br from-pink-50 via-white to-rose-50 shadow-md ring-1 ring-pink-100"
+          aria-label="BEST 추천 세트"
+        >
+          <div class="grid grid-cols-3 gap-0.5 bg-pink-100/50 sm:gap-1">
+            <img src="pic/shrimp.jpg" alt="딱새우와 연어" class="aspect-[4/3] w-full object-cover" width="400" height="300" loading="lazy" />
+            <img src="pic/Fried_Shrimp_Heads.jpg" alt="머리튀김" class="aspect-[4/3] w-full object-cover" width="400" height="300" loading="lazy" />
+            <img src="pic/Seafood_Ramyeon.jpg" alt="해물라면" class="aspect-[4/3] w-full object-cover" width="400" height="300" loading="lazy" />
+          </div>
+          <div class="p-6 md:p-8">
+            <div class="mb-4 flex flex-wrap items-center gap-2">
+              <span class="rounded-full bg-sulbam-red px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">BEST</span>
+              <span class="text-sm font-medium text-neutral-600">대표 세트</span>
+            </div>
+            <h3 class="mb-2 text-xl font-bold text-neutral-900 md:text-2xl">제주 딱새우회 + 머리튀김 + 해물라면</h3>
+            <p class="mb-4 text-sm text-neutral-600">신선한 회, 바삭한 머리튀김, 시원한 해물라면을 한 상에.</p>
+            <p class="text-2xl font-bold text-sulbam-pink md:text-3xl">50,000원</p>
+          </div>
+        </article>
+
+        <div class="mb-8 flex flex-wrap justify-center gap-2 md:gap-3" role="tablist" aria-label="메뉴 카테고리">
+          <button type="button" role="tab" aria-selected="true" aria-controls="panel-set" id="tab-set" data-tab="set" class="menu-tab rounded-full border-2 border-sulbam-blue bg-sulbam-blue px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sulbam-blue">세트</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="panel-hoe" id="tab-hoe" data-tab="hoe" class="menu-tab rounded-full border-2 border-pink-200 bg-white px-5 py-2.5 text-sm font-semibold text-rose-900 transition hover:border-sulbam-blue hover:text-sulbam-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sulbam-blue">회 · 찜</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="panel-yori" id="tab-yori" data-tab="yori" class="menu-tab rounded-full border-2 border-pink-200 bg-white px-5 py-2.5 text-sm font-semibold text-rose-900 transition hover:border-sulbam-blue hover:text-sulbam-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sulbam-blue">요리</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="panel-side" id="tab-side" data-tab="side" class="menu-tab rounded-full border-2 border-pink-200 bg-white px-5 py-2.5 text-sm font-semibold text-rose-900 transition hover:border-sulbam-blue hover:text-sulbam-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sulbam-blue">사이드</button>
+        </div>
+
+        <div id="panel-set" role="tabpanel" aria-labelledby="tab-set" class="menu-panel is-active">
+          <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <img src="pic/shrimp_and_salmon_sashimi.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5">
+                <h4 class="font-semibold text-neutral-900">딱새우회/연어회+머리튀김+해물라면</h4>
+                <p class="mt-2 text-xl font-bold text-sulbam-pink">62,000원</p>
+              </div>
+            </li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <img src="pic/Steamed_Shrimp_and_shrimp_sashimi.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5">
+                <h4 class="font-semibold text-neutral-900">제주딱새우회/찜+머리튀김+해물라면</h4>
+                <p class="mt-2 text-xl font-bold text-sulbam-pink">58,000원</p>
+              </div>
+            </li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <img src="pic/Steamed_Shrimp.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5">
+                <h4 class="font-semibold text-neutral-900">제주 딱새우찜+머리튀김+해물라면</h4>
+                <p class="mt-2 text-xl font-bold text-sulbam-pink">52,000원</p>
+              </div>
+            </li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <img src="pic/shrimp.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5">
+                <h4 class="font-semibold text-neutral-900">제주 딱새우회+머리튀김+해물라면</h4>
+                <p class="mt-2 text-xl font-bold text-sulbam-pink">50,000원</p>
+              </div>
+            </li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <img src="pic/shrimp_and_salmon_sashimi.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5">
+                <h4 class="font-semibold text-neutral-900">제주 딱새우회+숙성 연어회</h4>
+                <p class="mt-2 text-xl font-bold text-sulbam-pink">47,000원</p>
+              </div>
+            </li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <img src="pic/Steamed_Shrimp_and_shrimp_sashimi.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5">
+                <h4 class="font-semibold text-neutral-900">딱새우회+딱새우찜</h4>
+                <p class="mt-2 text-xl font-bold text-sulbam-pink">43,000원</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div id="panel-hoe" role="tabpanel" aria-labelledby="tab-hoe" class="menu-panel" hidden>
+          <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <li class="flex flex-col overflow-hidden rounded-xl border border-sulbam-blue/25 bg-gradient-to-br from-blue-50/80 to-white shadow-sm ring-1 ring-pink-50">
+              <img src="pic/shrimp.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5">
+                <h4 class="font-semibold text-neutral-900">제주 딱새우</h4>
+                <p class="mt-1 text-xs text-neutral-500">제주에서 올린 신선함</p>
+                <p class="mt-2 text-xl font-bold text-sulbam-pink">35,000원</p>
+              </div>
+            </li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-sulbam-blue/25 bg-gradient-to-br from-blue-50/80 to-white shadow-sm ring-1 ring-pink-50">
+              <img src="pic/salmon_sashimi.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5">
+                <h4 class="font-semibold text-neutral-900">술밤 숙성 연어회</h4>
+                <p class="mt-1 text-xs text-neutral-500">숙성의 깊은 맛</p>
+                <p class="mt-2 text-xl font-bold text-sulbam-pink">35,000원</p>
+              </div>
+            </li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm sm:col-span-2 lg:col-span-1">
+              <img src="pic/Steamed_Shrimp.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5">
+                <h4 class="font-semibold text-neutral-900">딱새우찜 <span class="text-sm font-normal text-neutral-600">(머리튀김 +3,000원)</span></h4>
+                <p class="mt-2 text-xl font-bold text-sulbam-pink">37,000원</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div id="panel-yori" role="tabpanel" aria-labelledby="tab-yori" class="menu-panel" hidden>
+          <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <li class="rounded-xl border border-pink-100 bg-white/90 p-5 shadow-sm ring-1 ring-pink-50"><h4 class="font-semibold">백골뱅이탕</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">32,000원</p></li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <img src="pic/Grilled_Chilean_Sea_Bass.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5"><h4 class="font-semibold">메로메로구이</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">30,000원</p></div>
+            </li>
+            <li class="rounded-xl border border-pink-100 bg-white/90 p-5 shadow-sm ring-1 ring-pink-50"><h4 class="font-semibold">민물장어 양념구이</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">26,000원</p></li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <!-- <img src="pic/Seafood_Ramyeon.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" /> -->
+              <div class="p-5"><h4 class="font-semibold">해물 토마토 국물 파스탕</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">20,000원</p></div>
+            </li>
+            <li class="rounded-xl border border-pink-100 bg-white/90 p-5 shadow-sm ring-1 ring-pink-50"><h4 class="font-semibold">눈꽃치즈 로제파스타</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">18,000원</p></li>
+            <li class="rounded-xl border border-pink-100 bg-white/90 p-5 shadow-sm ring-1 ring-pink-50"><h4 class="font-semibold">청양 크림 파스타</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">18,000원</p></li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <img src="pic/Grilled_Pork_Cartilage_and_Galbi.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5"><h4 class="font-semibold">오돌갈비 직화구이</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">20,000원</p></div>
+            </li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <!-- <img src="pic/Grilled_Pork_Cartilage_and_Galbi.jpg" alt="" class="h-40 w-full object-cover object-center" width="400" height="260" loading="lazy" /> -->
+              <div class="p-5"><h4 class="font-semibold">떡갈비 직화구이</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">20,000원</p></div>
+            </li>
+            <li class="rounded-xl border border-pink-100 bg-white/90 p-5 shadow-sm ring-1 ring-pink-50"><h4 class="font-semibold">부산 미도 어묵탕</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">18,000원</p></li>
+          </ul>
+        </div>
+
+        <div id="panel-side" role="tabpanel" aria-labelledby="tab-side" class="menu-panel" hidden>
+          <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <!-- <img src="pic/Grilled_Mackerel.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" /> -->
+              <div class="p-5"><h4 class="font-semibold">먹태 버터구이</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">8,000원</p></div>
+            </li>
+            <li class="rounded-xl border border-pink-100 bg-white/90 p-5 shadow-sm ring-1 ring-pink-50"><h4 class="font-semibold">케이준 감자튀김</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">8,000원</p></li>
+            <li class="rounded-xl border border-pink-100 bg-white/90 p-5 shadow-sm ring-1 ring-pink-50"><h4 class="font-semibold">파인샤베트</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">8,000원</p></li>
+            <li class="rounded-xl border border-pink-100 bg-white/90 p-5 shadow-sm ring-1 ring-pink-50"><h4 class="font-semibold">크림치즈볼</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">8,000원</p></li>
+            <li class="flex flex-col overflow-hidden rounded-xl border border-pink-100 bg-white/90 shadow-sm ring-1 ring-pink-50">
+              <img src="pic/Corn_Cheese.jpg" alt="" class="h-40 w-full object-cover" width="400" height="260" loading="lazy" />
+              <div class="p-5"><h4 class="font-semibold">콘치즈</h4><p class="mt-2 text-xl font-bold text-sulbam-pink">6,000원</p></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section id="location" class="scroll-mt-24 border-t border-pink-100/80 bg-white/75 py-16 backdrop-blur-sm md:py-24" aria-labelledby="location-heading">
+      <div class="mx-auto max-w-6xl px-4 md:px-6">
+        <h2 id="location-heading" class="mb-2 text-center text-sm font-semibold uppercase tracking-widest text-sulbam-pink">Visit</h2>
+        <p class="mb-10 text-center text-2xl font-bold text-rose-950 md:text-3xl">위치 · 예약</p>
+        <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+          <div class="overflow-hidden rounded-2xl shadow-lg ring-2 ring-pink-100">
+            <iframe
+              title="매장 위치 지도 (관악구 신림)"
+              class="h-72 w-full md:h-96"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=126.9244%2C37.4822%2C126.9322%2C37.4870&amp;layer=mapnik"
+            ></iframe>
+            <p class="bg-pink-50/90 px-4 py-2 text-center text-xs text-neutral-600">
+              정확한 위치는 <a href="https://map.naver.com/v5/search/%EA%B4%80%EC%95%85%EA%B5%AC%20%EC%8B%A0%EB%A6%BC%EB%A1%9C59%EA%B8%B8%2015-6" class="text-sulbam-blue underline" target="_blank" rel="noopener noreferrer">네이버 지도에서 주소 검색</a>으로 확인할 수 있습니다.
+            </p>
+          </div>
+          <article class="space-y-6">
+            <dl class="space-y-4 text-neutral-800">
+              <div>
+                <dt class="text-sm font-semibold text-rose-400">주소</dt>
+                <dd class="mt-1 text-lg text-rose-950">서울특별시 관악구 신림로59길 15-6 1층</dd>
+              </div>
+              <div>
+                <dt class="text-sm font-semibold text-rose-400">영업시간</dt>
+                <dd class="mt-1 space-y-1">
+                  <p>화 · 수 · 목 · 금 · 토 — 오후 6시 30분 ~ 새벽 2시</p>
+                  <p>일 — 오후 6시 ~ 새벽 1시</p>
+                  <p class="text-neutral-600">매주 월요일 정기 휴무</p>
+                </dd>
+              </div>
+              <div>
+                <dt class="text-sm font-semibold text-rose-400">전화</dt>
+                <dd class="mt-1 flex flex-wrap items-center gap-3">
+                  <a href="tel:+821071195498" id="phone-link" class="text-xl font-semibold text-sulbam-blue hover:underline">010-7119-5498</a>
+                  <button
+                    type="button"
+                    id="copy-phone-btn"
+                    class="inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-pink-200 bg-white text-rose-700 shadow-sm transition hover:border-sulbam-pink hover:bg-pink-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sulbam-pink"
+                    aria-label="전화번호 복사"
+                    title="전화번호 복사"
+                  >
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                  </button>
+                  <span id="copy-phone-toast" class="hidden text-sm font-medium text-emerald-600" role="status">복사했습니다</span>
+                </dd>
+              </div>
+            </dl>
+            <!-- <div class="flex flex-wrap gap-3">
+              <a
+                href="https://booking.naver.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex flex-1 min-w-[140px] items-center justify-center rounded-xl bg-sulbam-blue px-6 py-3.5 font-semibold text-white shadow transition hover:bg-[#3578c9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sulbam-blue"
+              >네이버 예약하기</a>
+              <a
+                href="tel:+821071195498"
+                class="inline-flex flex-1 min-w-[140px] items-center justify-center rounded-xl border-2 border-sulbam-blue bg-white px-6 py-3.5 font-semibold text-sulbam-blue transition hover:bg-blue-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sulbam-blue"
+              >전화 걸기</a>
+            </div> -->
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer: 벚꽃·밝은 톤 (룰 §5) -->
+  <footer class="border-t border-pink-200/80 bg-gradient-to-b from-pink-50 via-rose-50/90 to-pink-100/80 py-12 text-rose-900/90" role="contentinfo">
+    <div class="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 text-center md:flex-row md:justify-between md:text-left md:px-6">
+      <div>
+        <p class="text-lg font-bold text-rose-950">Sulbam <span class="text-sulbam-pink">술밤</span></p>
+        <p class="mt-2 text-sm text-rose-800/80">© <span id="year"></span> 술밤. All rights reserved.</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <a
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-pink-200 bg-white text-sulbam-pink shadow-sm transition hover:bg-pink-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sulbam-pink"
+          aria-label="술밤 인스타그램"
+        >
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var PHONE_DISPLAY = '010-7119-5498';
+      var PHONE_COPY = '010-7119-5498';
+
+      var header = document.getElementById('site-header');
+      var navLinks = document.querySelectorAll('.nav-link');
+      var brand = document.querySelector('.brand-text');
+
+      function updateHeader() {
+        var scrolled = window.scrollY > 40;
+        header.classList.toggle('is-scrolled', scrolled);
+        navLinks.forEach(function (el) {
+          el.classList.toggle('drop-shadow', !scrolled);
+        });
+        if (brand) brand.classList.toggle('drop-shadow', !scrolled);
+      }
+
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      updateHeader();
+
+      var tabButtons = document.querySelectorAll('.menu-tab');
+      var panels = {
+        set: document.getElementById('panel-set'),
+        hoe: document.getElementById('panel-hoe'),
+        yori: document.getElementById('panel-yori'),
+        side: document.getElementById('panel-side'),
+      };
+
+      var activeClasses = ['border-sulbam-blue', 'bg-sulbam-blue', 'text-white'];
+      var inactiveClasses = ['border-pink-200', 'bg-white', 'text-rose-900'];
+
+      function showTab(name) {
+        Object.keys(panels).forEach(function (key) {
+          var panel = panels[key];
+          if (!panel) return;
+          if (key === name) {
+            panel.classList.add('is-active');
+            panel.removeAttribute('hidden');
+          } else {
+            panel.classList.remove('is-active');
+            panel.setAttribute('hidden', '');
+          }
+        });
+
+        tabButtons.forEach(function (btn) {
+          var tabName = btn.getAttribute('data-tab');
+          var isActive = tabName === name;
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          activeClasses.forEach(function (c) {
+            btn.classList.toggle(c, isActive);
+          });
+          inactiveClasses.forEach(function (c) {
+            btn.classList.toggle(c, !isActive);
+          });
+        });
+      }
+
+      tabButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var name = btn.getAttribute('data-tab');
+          if (name) showTab(name);
+        });
+      });
+
+      var copyBtn = document.getElementById('copy-phone-btn');
+      var toast = document.getElementById('copy-phone-toast');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+          function showToast() {
+            if (!toast) return;
+            toast.classList.remove('hidden');
+            window.setTimeout(function () {
+              toast.classList.add('hidden');
+            }, 2000);
+          }
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(PHONE_COPY).then(showToast).catch(function () {
+              window.prompt('전화번호를 복사하세요', PHONE_DISPLAY);
+            });
+          } else {
+            try {
+              var ta = document.createElement('textarea');
+              ta.value = PHONE_COPY;
+              ta.setAttribute('readonly', '');
+              ta.style.position = 'fixed';
+              ta.style.left = '-9999px';
+              document.body.appendChild(ta);
+              ta.select();
+              document.execCommand('copy');
+              document.body.removeChild(ta);
+              showToast();
+            } catch (e) {
+              window.prompt('전화번호를 복사하세요', PHONE_DISPLAY);
+            }
+          }
+        });
+      }
+
+      var y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
